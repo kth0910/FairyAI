@@ -1,10 +1,10 @@
 "use client";
 
 import Image from 'next/image';
+import { stories } from '../data/stories';
 
-export default function Sidebar() {
-    const menuItems = [1, 2, 3, 4]; // Placeholder items
-
+export default function Sidebar({ onSelectStory }) {
+    
     return (
         <aside style={{
             width: '260px',
@@ -17,15 +17,17 @@ export default function Sidebar() {
             height: '100vh',
             overflowY: 'auto'
         }}>
-            {menuItems.map((item) => (
-                <div key={item} style={{
-                    backgroundColor: 'white',
-                    borderRadius: '15px',
-                    padding: '10px',
-                    cursor: 'pointer',
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                    transition: 'transform 0.2s',
-                }}
+            {stories.map((story) => (
+                <div key={story.id} 
+                    onClick={() => onSelectStory(story)}
+                    style={{
+                        backgroundColor: 'white',
+                        borderRadius: '15px',
+                        padding: '10px',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                        transition: 'transform 0.2s',
+                    }}
                     onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
                     onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                 >
@@ -38,10 +40,10 @@ export default function Sidebar() {
                         border: '2px solid #FFD3B6'
                     }}>
                         <Image
-                            src="/image.png"
-                            alt="Menu Thumbnail"
+                            src={story.thumbnail}
+                            alt={story.title}
                             fill
-                            style={{ objectFit: 'cover' }}
+                            style={{ objectFit: 'cover', objectPosition: 'top' }}
                         />
                     </div>
                     <p style={{
@@ -49,7 +51,7 @@ export default function Sidebar() {
                         marginTop: '8px',
                         fontWeight: 'bold',
                         color: '#FF6B6B'
-                    }}>동화 {item}</p>
+                    }}>{story.title}</p>
                 </div>
             ))}
         </aside>

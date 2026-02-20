@@ -3,7 +3,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-export default function SortableItem({ id, children }) {
+export default function SortableItem({ id, children, height }) {
     const {
         attributes,
         listeners,
@@ -15,6 +15,7 @@ export default function SortableItem({ id, children }) {
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
+        height: height || 'auto',
     };
 
     return (
